@@ -30,12 +30,12 @@ used to store the JSON string in local storage ensuring the latest state of task
 
 Next, I define another function that retrieves the todo task data from local storage, parsing, populating and displaying the task list into the DOM in line 107.
 
-To fetch todos from the API, I defined a function that will be making a GET request from an API endpoint url, extracting each title from there. I created the taskObject variable with a generated ID and task title
+To fetch todos from the API, I defined a function that will be making a GET request from an API endpoint url, extracting each title from there if the tasks array is empty. I created the taskObject variable with a generated ID and task title
 that was looped, pushing it to the tasks array and then calling the saveTodoData function to update the locale storage on line 128.
 
-I then defined a function that allows user to clear the list of todo task items array and clear the local storage on line 153.
+I then defined a function that allows user to clear the list of todo task items array and clear the local storage on line 155.
 
-Finally, on lines 160 and 162, I call the showTodoTask and apiTodos functions to recall the todos from the arrays from local storage and to pre populate the task container with the data from the API when the page
+Finally, on lines 162 and 164, I call the apiTodos and showTodoTask functions to recall the todos from the arrays from local storage and to pre populate the task container with the data from the API when the page
 loads when the input box is empty.
 
 */
@@ -126,11 +126,11 @@ function showTodoTask() {
 
 
 function apiTodos() {
-	
+	if (tasks.length === 0) {
 	axios.get('https://jsonplaceholder.typicode.com/todos')
 			.then(response => {
 				let todos = response.data;
-					for(let i= 0; i < 4; i++) {
+					for(let i= 0; i < 5; i++) {
 					let taskObject = {
 						id: generateId(),
 						text: todos[i].title
@@ -143,6 +143,8 @@ function apiTodos() {
 				}
 				
 			});
+		}
+
 	}
 		
 			
