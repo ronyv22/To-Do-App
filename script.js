@@ -16,7 +16,7 @@ In line 51 and 52,the first thing I did was declared two variables that referenc
 
 Before assigning each new todo item as an object, I defined a function that will generate a unique Id number using the date.now, math.random and floor methods in line 55.
 
-After that, I declared a variable that will be assigned to an array that will be holding the todo items on line 60.
+After that, I declared a variable that will be assigned to retrieve and parse the stored tasks from local storage and if there are no tasks stored an empty array is assigned in line 60.
 
 In line 64, I then defined another function allowing the user to add a todo item to the task-container from the input-box field. Condition statments were added if the 
 user did not type anything into the input field before adding, an alert with a message will informing them to do so. Else, a new object from said todo task is created with 
@@ -57,7 +57,7 @@ function generateId() {
 }
 
 
-let tasks = [];
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
 
 
@@ -98,7 +98,7 @@ taskContainer.addEventListener("click", function (e) {
     e.target.classList.toggle("checked"); 
     saveTodoTaskData();
   }
-});
+}, false);
 
 
 
@@ -182,3 +182,4 @@ function resetTasks() {
 apiTodos();
 
 showTodoTask();
+
